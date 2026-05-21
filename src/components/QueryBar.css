@@ -1,0 +1,151 @@
+.qbar {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.qbar input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0 14px;
+  height: 34px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+  letter-spacing: 0.01em;
+}
+.qbar input::placeholder { color: var(--text-muted); }
+.qbar input:focus { border-color: var(--accent); }
+.qbar input:disabled { opacity: 0.55; }
+
+.qbar-chips {
+  display: flex;
+  gap: 4px;
+  align-items: stretch;
+}
+.qbar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  height: 34px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.qbar-chip:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+.qbar-chip:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.qbar-chip b {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.qbar-chip-lbl { color: var(--text-muted); font-size: 9.5px; }
+.qbar-chip-caret { color: var(--text-muted); font-size: 10px; }
+.qbar-chip-toggle.on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.qbar-chip-toggle.on .qbar-chip-caret { color: var(--accent); }
+
+.qbar-fire {
+  padding: 0 18px !important;
+  height: 34px;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+}
+.qbar-fire-icon {
+  font-size: 13px;
+}
+
+/* Hero variant — bigger input, hide chips inline (still right-aligned, smaller) */
+.qbar.hero {
+  padding: 0;
+  background: transparent;
+  border-bottom: none;
+  margin-top: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.qbar.hero input {
+  font-size: 17px;
+  height: 52px;
+  padding: 0 22px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-hover);
+  flex: 1 1 100%;
+}
+.qbar.hero input::placeholder { font-style: italic; }
+.qbar.hero .qbar-fire {
+  height: 38px;
+  padding: 0 24px !important;
+  font-size: 12px !important;
+  letter-spacing: 0.16em !important;
+}
+.qbar.hero .qbar-chip { height: 38px; }
+
+/* examples — hidden by default, revealed via `ex` toggle chip */
+.qbar-examples {
+  display: flex;
+  gap: 5px;
+  padding: 8px 16px 10px;
+  flex-wrap: wrap;
+  background: var(--bg-secondary);
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  animation: fade-in 0.2s ease-out;
+}
+.qbar-ex {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 9px;
+  border-radius: 2px;
+  border: 1px dashed var(--border);
+  background: var(--bg-primary);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.12s;
+  letter-spacing: 0.02em;
+}
+.qbar-ex:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  border-style: solid;
+  background: var(--accent-dim);
+}
+.qbar-ex:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .qbar { flex-wrap: wrap; }
+  .qbar input { flex: 1 1 100%; }
+}

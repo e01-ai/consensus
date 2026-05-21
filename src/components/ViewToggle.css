@@ -1,0 +1,53 @@
+.viewtoggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.viewtoggle-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.viewtoggle-segs {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+.viewtoggle-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.viewtoggle-seg + .viewtoggle-seg {
+  border-left: 1px solid var(--border);
+}
+.viewtoggle-seg:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+.viewtoggle-seg.active {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.viewtoggle-icon {
+  font-size: 12px;
+  line-height: 1;
+}

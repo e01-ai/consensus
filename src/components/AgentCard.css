@@ -1,0 +1,263 @@
+.agent-card {
+  --c: var(--accent);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  min-height: 34px;
+  max-height: 220px;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s,
+              max-height 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+              min-height 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  cursor: default;
+}
+
+.agent-card.queued {
+  opacity: 0.55;
+  max-height: 34px;
+  min-height: 34px;
+}
+.agent-card.queued .agent-card-body { display: none; }
+
+.agent-card.streaming {
+  min-height: 140px;
+  max-height: 240px;
+  border-color: var(--c);
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--c) 22%, transparent) 0.7px, transparent 0.7px) 0 0 / 8px 8px,
+    var(--bg-secondary);
+}
+.agent-card.streaming.expanded {
+  max-height: 360px;
+}
+.agent-card.streaming::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 2px;
+  background: var(--c);
+  z-index: 2;
+  pointer-events: none;
+  animation: agent-card-topbar 0.55s ease-in-out infinite alternate;
+}
+@keyframes agent-card-topbar {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+
+.agent-card.done {
+  border-color: color-mix(in srgb, var(--c) 28%, var(--border));
+  background: linear-gradient(180deg, var(--bg-secondary), color-mix(in srgb, var(--c) 3%, var(--bg-secondary)));
+  max-height: 34px;
+  min-height: 34px;
+  cursor: pointer;
+}
+.agent-card.done .agent-card-body {
+  max-height: 0;
+  padding: 0 10px;
+  opacity: 0;
+  transition: max-height 0.55s cubic-bezier(0.2, 0.7, 0.2, 1), padding 0.4s, opacity 0.3s, filter 0.45s;
+  filter: blur(2px);
+}
+.agent-card.done.expanded {
+  max-height: 280px;
+  min-height: 140px;
+}
+.agent-card.done.expanded .agent-card-body {
+  max-height: 280px;
+  padding: 8px 10px;
+  opacity: 1;
+  filter: blur(0);
+}
+
+.agent-card.err {
+  border-color: rgba(200, 90, 90, 0.4);
+  background: rgba(200, 90, 90, 0.03);
+  min-height: 60px;
+}
+
+.agent-card-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  min-height: 26px;
+  position: relative;
+  z-index: 2;
+}
+
+.agent-card-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.agent-card.streaming .agent-card-dot {
+  animation: orb-pulse 1s ease-in-out infinite;
+  opacity: 1;
+}
+
+.agent-card-idx {
+  color: var(--text-muted);
+  font-size: 8.5px;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.agent-card-name {
+  color: var(--c);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 9px;
+  flex: 1;
+  min-width: 0;
+}
+
+.agent-card-tps {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 8.5px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.agent-card.streaming .agent-card-tps { color: var(--c); }
+.agent-card.done .agent-card-tps { color: var(--accent); }
+
+.agent-card-body {
+  flex: 1;
+  padding: 8px 10px;
+  overflow: auto;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  position: relative;
+  z-index: 1;
+}
+.agent-card-body .agent-card-empty {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-style: italic;
+}
+.agent-card-err {
+  color: var(--red);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.agent-card-text {
+  white-space: pre-wrap;
+}
+
+/* Per-flush spark segment — dramatic entry: blur+glow flash, then settle */
+.agent-card-seg {
+  display: inline;
+  white-space: pre-wrap;
+  color: var(--text-primary);
+  animation: agent-seg-spark 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes agent-seg-spark {
+  0% {
+    opacity: 0;
+    color: var(--c);
+    filter: blur(3px) brightness(2.2);
+    text-shadow:
+      0 0 8px var(--c),
+      0 0 18px color-mix(in srgb, var(--c) 70%, transparent),
+      0 0 30px color-mix(in srgb, var(--c) 40%, transparent);
+    letter-spacing: 0.04em;
+  }
+  25% {
+    opacity: 1;
+    color: var(--c);
+    filter: blur(0) brightness(1.7);
+    text-shadow:
+      0 0 6px var(--c),
+      0 0 14px color-mix(in srgb, var(--c) 50%, transparent);
+    letter-spacing: 0.02em;
+  }
+  60% {
+    opacity: 1;
+    color: color-mix(in srgb, var(--c) 70%, var(--text-primary));
+    filter: brightness(1.25);
+    text-shadow: 0 0 4px color-mix(in srgb, var(--c) 35%, transparent);
+    letter-spacing: 0;
+  }
+  100% {
+    opacity: 1;
+    color: var(--text-primary);
+    filter: brightness(1);
+    text-shadow: 0 0 0 transparent;
+    letter-spacing: 0;
+  }
+}
+
+/* Latest few segments get a longer-tail afterglow via :nth-last-child */
+.agent-card.streaming .agent-card-seg:nth-last-child(-n+3) {
+  animation-duration: 1.2s;
+}
+
+/* Mini per-card speed bar under the header */
+.agent-card-speedbar {
+  height: 2px;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.agent-card-speedbar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--c);
+  transition: width 0.25s ease-out;
+}
+.agent-card.done .agent-card-speedbar {
+  background: color-mix(in srgb, var(--c) 18%, var(--border));
+}
+.agent-card.done .agent-card-speedbar-fill {
+  background: color-mix(in srgb, var(--c) 50%, var(--bg-tertiary));
+  box-shadow: none;
+}
+
+.agent-card-comet {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  vertical-align: text-bottom;
+  background: var(--c);
+  margin-left: 2px;
+  border-radius: 0;
+  box-shadow:
+    0 0 6px var(--c),
+    0 0 14px color-mix(in srgb, var(--c) 60%, transparent);
+  animation: agent-comet 0.45s ease-in-out infinite alternate;
+}
+@keyframes agent-comet {
+  from {
+    opacity: 0.4;
+    transform: scaleY(0.85);
+    box-shadow: 0 0 4px var(--c);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1.05);
+    box-shadow:
+      0 0 10px var(--c),
+      0 0 22px color-mix(in srgb, var(--c) 60%, transparent);
+  }
+}

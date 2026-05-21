@@ -1,0 +1,31 @@
+{
+  "name": "consensus",
+  "version": "0.1.0",
+  "description": "Ask not one, but Nx agents. 50× parallel persona swarm over GLM-5.1 / OpenAI-compat endpoints — spawn, fan-out, consolidate. By E01.ai.",
+  "private": true,
+  "type": "module",
+  "homepage": "https://e01.ai/consensus",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/e01-ai/consensus.git"
+  },
+  "author": "E01.ai",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "^5.6.0",
+    "vite": "^8.0.3"
+  }
+}

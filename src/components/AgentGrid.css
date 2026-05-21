@@ -1,0 +1,39 @@
+.agent-grid {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+.agent-grid.compact {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 4px;
+}
+
+.agent-grid-empty {
+  padding: 50px 20px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+.agent-grid-empty-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  background: var(--bg-secondary);
+}
+.agent-grid-empty-inner.muted {
+  color: var(--text-muted);
+  border-style: dashed;
+}
+.agent-grid-empty-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 8px var(--orange-glow);
+  animation: orb-pulse 1s ease-in-out infinite;
+}
