@@ -18,21 +18,11 @@ export interface ProviderDef {
 
 export const PROVIDERS: ProviderDef[] = [
   {
-    id: 'zai-highspeed',
-    name: 'z.ai · highspeed',
-    endpoint: 'https://open.bigmodel.cn/api/paas/v4/chat/completions',
-    defaultModel: 'glm-5.1-highspeed',
-    modelSuggestions: ['glm-5.1-highspeed'],
-    keyHint: 'paste z.ai / bigmodel key',
-    keyUrl: 'https://open.bigmodel.cn',
-    keyUrlLabel: 'bigmodel',
-  },
-  {
     id: 'zai-glm51',
-    name: 'z.ai · GLM-5.1',
+    name: 'z.ai · GLM',
     endpoint: 'https://open.bigmodel.cn/api/paas/v4/chat/completions',
-    defaultModel: 'glm-5.1',
-    modelSuggestions: ['glm-5.1', 'glm-4.5'],
+    defaultModel: 'glm-4.5-airx',
+    modelSuggestions: ['glm-4.5-airx', 'glm-5-turbo', 'glm-4.5-flash'],
     keyHint: 'paste z.ai / bigmodel key',
     keyUrl: 'https://open.bigmodel.cn',
     keyUrlLabel: 'bigmodel',
@@ -68,6 +58,16 @@ export const PROVIDERS: ProviderDef[] = [
     keyHint: 'paste OpenRouter key',
     keyUrl: 'https://openrouter.ai/keys',
     keyUrlLabel: 'OpenRouter',
+  },
+  {
+    id: 'zai-highspeed',
+    name: 'z.ai · highspeed (legacy)',
+    endpoint: 'https://open.bigmodel.cn/api/paas/v4/chat/completions',
+    defaultModel: 'glm-5.1-highspeed',
+    modelSuggestions: ['glm-5.1-highspeed', 'glm-5.1'],
+    keyHint: 'paste z.ai / bigmodel key',
+    keyUrl: 'https://open.bigmodel.cn',
+    keyUrlLabel: 'bigmodel',
   },
   {
     id: 'custom',

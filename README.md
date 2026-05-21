@@ -24,9 +24,10 @@ BYOK (Bring Your Own Key). No backend. Runs entirely in the browser.
 
 | Provider     | Default model                                          | Get a key |
 |--------------|--------------------------------------------------------|-----------|
-| **z.ai**     | `glm-5.1-highspeed`, `glm-5.1`                         | [bigmodel.cn](https://open.bigmodel.cn) |
+| **z.ai · GLM** *(default)* | `glm-4.5-airx`, `glm-5-turbo`, `glm-4.5-flash` | [bigmodel.cn](https://open.bigmodel.cn) |
 | **Fireworks**| `accounts/fireworks/routers/kimi-k2p6-turbo`           | [Fire Pass](https://app.fireworks.ai/fire-pass) |
 | **OpenRouter**| `z-ai/glm-4.6` (or any model id)                      | [OpenRouter](https://openrouter.ai/keys) |
+| **z.ai · highspeed** *(legacy)* | `glm-5.1-highspeed`, `glm-5.1`              | [bigmodel.cn](https://open.bigmodel.cn) |
 | **Custom**   | any OpenAI-compatible URL                              | — |
 
 Per-provider keys persist independently in `localStorage` (key `swarm.state.v3`).
