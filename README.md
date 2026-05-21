@@ -10,7 +10,9 @@ A tech-demo by [E01.ai](https://e01.ai). Live: <https://e01.ai/consensus>.
 
 BYOK (Bring Your Own Key). No backend. Runs entirely in the browser.
 
-![consensus screenshot](screenshot/sc.png)
+![consensus demo](screenshot/rec.gif)
+
+> Higher-res recording: [`screenshot/rec.mp4`](screenshot/rec.mp4). Still frame: [`screenshot/sc.png`](screenshot/sc.png).
 
 ## How it works
 
