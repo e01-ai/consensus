@@ -9,6 +9,8 @@ export interface StreamArgs {
   signal?: AbortSignal
   maxTokens?: number
   temperature?: number
+  /** If true, skip the per-provider thinking-off knobs (let model reason). */
+  allowReasoning?: boolean
   onChunk: (chunk: string) => void
 }
 
@@ -24,6 +26,7 @@ export async function streamChat(args: StreamArgs): Promise<void> {
     endpoint, apiKey, model,
     sys, user, signal,
     maxTokens = 600, temperature = 0.7,
+    allowReasoning = false,
     onChunk,
   } = args
 
@@ -39,7 +42,7 @@ export async function streamChat(args: StreamArgs): Promise<void> {
       { role: 'system', content: sys },
       { role: 'user',   content: user },
     ],
-    ...disableThinkingParams(endpoint),
+    ...(allowReasoning ? {} : disableThinkingParams(endpoint)),
   }
 
   let res: Response | undefined

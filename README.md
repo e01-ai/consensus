@@ -30,8 +30,8 @@ BYOK (Bring Your Own Key). No backend. Runs entirely in the browser.
 | **z.ai · highspeed** *(legacy)* | `glm-5.1-highspeed`, `glm-5.1`              | [bigmodel.cn](https://open.bigmodel.cn) |
 | **Custom**   | any OpenAI-compatible URL                              | — |
 
-Per-provider keys persist independently in `localStorage` (key `swarm.state.v3`).
-**No keys ship in the bundle.** Click the model button in the header to configure.
+Per-provider keys are kept in your browser's `localStorage`. Nothing ships in
+the bundle, nothing leaves the page — BYOK.
 
 ## Setup
 
@@ -48,9 +48,8 @@ npm run preview    # serve dist/
 npm run typecheck  # tsc --noEmit
 ```
 
-Built bundle uses **relative asset paths** (`base: './'`) — drop `dist/` at the
-root *or* a subdirectory (`/consensus/`, `/foo/bar/`) and it just works. The
-live demo serves `dist/` under `/consensus/`.
+Bundle uses **relative asset paths** (`base: './'`) — drop `dist/` at the
+root *or* any subdirectory and it works.
 
 ## Tunable knobs (in-app, no rebuild)
 
@@ -68,6 +67,10 @@ Each provider gets its own field shape to suppress chain-of-thought streams
 - **z.ai** — `thinking: { type: "disabled" }`
 - **Fireworks** — `reasoning_effort: "low"`
 - **OpenRouter** — `reasoning: { exclude: true, max_tokens: 0 }`
+
+A per-provider **allow reasoning** toggle in the settings modal disables these
+knobs — useful for OpenRouter models that reject the request with *"reasoning
+is mandatory"*.
 
 ## Architecture
 
@@ -91,8 +94,6 @@ src/
   styles/
     globals.css                 design tokens (E01 palette)
     app.css                     layout
-legacy/
-  agent-swarm.html              original single-file prototype
 ```
 
 ## License

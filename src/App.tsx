@@ -20,9 +20,9 @@ export function App() {
   const [config, setConfig] = useState<SwarmConfig>({ nRoles: 50, batchSize: 5, qps: 3 })
   const userOverrideRef = useRef(false)
 
-  const { provider, endpoint, model, key } = useMemo(() => resolveActive(state), [state])
+  const { provider, endpoint, model, key, allowReasoning } = useMemo(() => resolveActive(state), [state])
   const { snapshot, fire, stop } = useSwarm({
-    endpoint, apiKey: key, model,
+    endpoint, apiKey: key, model, allowReasoning,
     nRoles: config.nRoles, batchSize: config.batchSize, qps: config.qps,
   })
 

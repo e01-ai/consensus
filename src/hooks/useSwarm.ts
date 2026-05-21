@@ -14,6 +14,7 @@ interface UseSwarmArgs {
   endpoint: string
   apiKey: string
   model: string
+  allowReasoning?: boolean
   nRoles?: number
   batchSize?: number
   qps?: number
@@ -205,6 +206,7 @@ export function useSwarm(cfg: UseSwarmArgs) {
       endpoint: cfgRef.current.endpoint,
       apiKey:   cfgRef.current.apiKey,
       model:    cfgRef.current.model,
+      allowReasoning: cfgRef.current.allowReasoning,
       sys, user, signal,
       maxTokens: 10000, temperature: 0.85,
       onChunk: chunk => {

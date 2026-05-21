@@ -16,6 +16,7 @@ export function ProviderModal({ state, onUpdate, onClose }: Props) {
     keys:             { ...state.keys },
     endpoints:        { ...state.endpoints },
     models:           { ...state.models },
+    allowReasoning:   { ...state.allowReasoning },
   }))
   const [manualOpen, setManualOpen] = useState(false)
   const [manualValue, setManualValue] = useState('')
@@ -189,6 +190,27 @@ export function ProviderModal({ state, onUpdate, onClose }: Props) {
                         </div>
                       )}
                     </div>
+                  )}
+
+                  {isActive && (
+                    <label className="pm-card-reasoning" onClick={e => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        checked={!!draft.allowReasoning[p.id]}
+                        onChange={e => setDraft(prev => ({
+                          ...prev,
+                          allowReasoning: { ...prev.allowReasoning, [p.id]: e.target.checked },
+                        }))}
+                      />
+                      <span className="pm-card-reasoning-text">
+                        allow reasoning
+                        <span className="pm-card-reasoning-hint">
+                          {p.id === 'openrouter'
+                            ? 'tick if model errors with "reasoning is mandatory"'
+                            : 'tick to let model think (defeats "thinking-off" knob)'}
+                        </span>
+                      </span>
+                    </label>
                   )}
                 </div>
               )

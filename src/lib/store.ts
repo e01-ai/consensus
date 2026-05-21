@@ -12,6 +12,9 @@ export interface SwarmState {
   endpoints: Record<string, string>
   /** Per-provider model override (resolves to provider.defaultModel otherwise). */
   models: Record<string, string>
+  /** Per-provider: allow model to use reasoning (skip the "thinking-off" knob).
+   *  Needed for OpenRouter models that error with "reasoning is mandatory". */
+  allowReasoning: Record<string, boolean>
 }
 
 const STORAGE_KEY = 'swarm.state.v3'
@@ -24,6 +27,7 @@ function fallbackState(): SwarmState {
     keys: {},
     endpoints: {},
     models: {},
+    allowReasoning: {},
   }
 }
 
@@ -39,6 +43,7 @@ export function loadState(): SwarmState {
         keys: { ...(j.keys || {}) },
         endpoints: { ...(j.endpoints || {}) },
         models: { ...(j.models || {}) },
+        allowReasoning: { ...(j.allowReasoning || {}) },
       }
     }
     // Migrate v2 (single-config) → v3 if present
@@ -70,5 +75,6 @@ export function resolveActive(s: SwarmState) {
   const endpoint = s.endpoints[provider.id] || provider.endpoint
   const model = s.activeModelId || s.models[provider.id] || provider.defaultModel
   const key = s.keys[provider.id] || provider.builtinKey || ''
-  return { provider, endpoint, model, key }
+  const allowReasoning = !!s.allowReasoning?.[provider.id]
+  return { provider, endpoint, model, key, allowReasoning }
 }
